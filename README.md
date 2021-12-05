@@ -38,7 +38,7 @@ You can specify the format of the output
         %c      country code - always
         %dur    duration in format hour:minute
         %f      country code, only when not cz (deletes one character next to itselft if not cz)
-        
+                - you can change the country code to ignore on line 224
         %st     locality of the first point- API
         %e      locality of the last point - API
         %y      year of the first point
