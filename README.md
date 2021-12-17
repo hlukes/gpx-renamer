@@ -56,8 +56,6 @@ Defines how to handle missing info (empty time, locality etc.)
 ```
 ## Structured
 Not yet functional, work in progress
-Some general info:
-* automatic folder search can find input, output, manual and orig folders in the folder of the main script
-* how to use rename options is explained in the code in comments (for now)
+
 
 

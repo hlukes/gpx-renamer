@@ -5,6 +5,15 @@ import re
 import os
 import sys
 
+#TODO
+#in tkinter, disable buttons after movegpx launch
+#Progress reporting to tkinter
+#build not-gpx file clenup elsewhere
+
+
+
+
+
 def subGpx(inp,outp,orig,manual,inp_str,empt):
             self.pb["value"] = 100-((len(os.listdir(inp))/countGpxInt)*100)
             self.leftGpx.set("Gpx zbývá: " + str(len(os.listdir(inp))))
