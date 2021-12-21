@@ -53,6 +53,7 @@ You can specify the format of the output
         %ts     time of start in format  hour:minute
         %te     time of end in format  hour:minute
     ```
+You can change these placeholders, BUT you always have to define more specific placeholders first (%dur before %d), not doing so will result will in incorrect format in output file names.
 #### Missing info handeling
 Defines how to handle missing info (empty time, locality etc.)
 ```
