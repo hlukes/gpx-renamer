@@ -1,8 +1,14 @@
 # gpx-renamer
+Hello,
+This is a python GPX file renamer.
+It can rename your gpx files using relevant info from the file itself (time,duration etc.) as well as with place names, which it obtains from a BigDataCloud Geocoding API.
+Currently, standalone version is functional and structed is is being worked on.
+Structured version should provide a settings json file, where you can change some default settings that can be only changed in the python script itself in the standalone version.
+It should also separate the Tkinter GUI and the gpx moving process, making the code cleaner and easier to read and change.
 ## Standalone
 This is an early version of GPX renamer with tkinter GUI
 Works as is, as long as you provide:
-* key.json with your bigdatacloud API key (in the same folder as the script) like this:
+* key.json file with your bigdatacloud API key (in the same folder as the script) like this:
     ```json
         {
         "key":"your_key_here"
