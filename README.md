@@ -1,9 +1,9 @@
 # gpx-renamer
 Hello,
 This is a python GPX file renamer.
-It can rename your gpx files using relevant info from the file itself (time,duration etc.) as well as with place names, which it obtains from a BigDataCloud Geocoding API.
-Currently, standalone version is functional and structed is is being worked on.
-Structured version should provide a settings json file, where you can change some default settings that can be only changed in the python script itself in the standalone version.
+It can rename your gpx files using relevant info from the file itself (time,duration etc.) as well as with place names, which it obtains from a BigDataCloud Geocoding API.  
+Currently, standalone version is functional and structed is is being worked on.  
+Structured version should provide a settings json file, where you can change some default settings that can be only changed in the python script itself in the standalone version.  
 It should also separate the Tkinter GUI and the gpx moving process, making the code cleaner and easier to read and change.
 ## Standalone
 This is an early version of GPX renamer with tkinter GUI
@@ -53,6 +53,7 @@ You can specify the format of the output
         %ts     time of start in format  hour:minute
         %te     time of end in format  hour:minute
     ```
+You can change these placeholders, BUT you always have to define more specific placeholders first (%dur before %d), not doing so will result will in incorrect format in output file names.
 #### Missing info handeling
 Defines how to handle missing info (empty time, locality etc.)
 ```
