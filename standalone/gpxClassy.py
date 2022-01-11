@@ -261,16 +261,14 @@ class MainApplication(tk.Frame):
                 while (final_name_raw+".gpx") in os.listdir(outp):
                         y = y+1
                         final_name_raw = nur+"_"+str(y)
-                        #print (y)
                 final_name_raw = final_name_raw+".gpx"
                 shutil.move(in_path_file,(outp+"\\"+final_name_raw))
             else:
-                #Problem, os.listdir not working without manual
+                #Problem, os.listdir not working without manual % should not be a problem
 
                 while (final_name_raw+".gpx") in os.listdir(manual):
                         y = y+1
                         final_name_raw = nur+"_"+str(y)
-                        #print (y)
                 final_name_raw = final_name_raw+".gpx"
                 shutil.move(in_path_file,(manual+"/"+final_name_raw))
             
