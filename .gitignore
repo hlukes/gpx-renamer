@@ -10,4 +10,4 @@ standalone/key.json
 structured/key.json
 structured/settings.json
 TODO.txt
-structured/
+structured/*
