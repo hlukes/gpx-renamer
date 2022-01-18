@@ -9,5 +9,5 @@ standalone/origg/
 standalone/key.json
 structured/key.json
 TODO.txt
-structured/__pychache__/
+structured/__pycache__
 
