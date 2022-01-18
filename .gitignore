@@ -8,6 +8,7 @@ standalone/manuall/
 standalone/origg/
 standalone/key.json
 structured/key.json
-structured/settings.json
 TODO.txt
-structured/*
+structured/__pychache__/
+structured/__pychache__/gpxmove.cpython-310.pyc
+
