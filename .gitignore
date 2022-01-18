@@ -10,5 +10,5 @@ standalone/key.json
 structured/key.json
 TODO.txt
 structured/__pychache__/
-structured/__pychache__/gpxmove.cpython-310.pyc
+structured/__pychache__/*
 
