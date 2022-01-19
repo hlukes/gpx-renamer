@@ -17,7 +17,7 @@ import string
 
 
 
-def subGpx(inp,outp,orig,manual,inp_str,empt,apiKey):
+def subGpx(inp,outp,orig,manual,inp_str,empt,apiKey,country_ignored):
             
             global y
             y = 0
