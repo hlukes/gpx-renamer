@@ -102,7 +102,7 @@ def subGpx(inp,outp,orig,manual,inp_str,empt,apiKey,country_ignored):
                                 nur = nur.replace(i.rep,i.content)
                                 #print(str(i.rep))
                             else:
-                                if i.content.lower() == "cz":
+                                if i.content.lower() == country_ignored:
                                     if nur.endswith(str(i.rep)):
                                         inst = re.sub("[^a-zA-Z]?%s" % i.rep,"",nur)
                                         nur = inst
