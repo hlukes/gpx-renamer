@@ -1,5 +1,4 @@
 # gpx-renamer
-Hello,
 This is a python GPX file renamer.
 It can rename your gpx files using relevant info from the file itself (time,duration etc.) as well as with place names, which it obtains from a BigDataCloud Geocoding API.  
 Currently, standalone version is functional and structed is is being worked on.  
