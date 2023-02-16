@@ -160,8 +160,16 @@ class MainApplication(tk.Frame):
                 if not file_name in orig_cont:
                         shutil.copy2(in_path_file,orig)
 
-            gpx_file = open(in_path_file, 'r', encoding='utf-8')
-            gpx = gpxpy.parse(gpx_file)
+            # testing testing
+            try:
+                with open(in_path_file, 'r', encoding='utf-8') as gpx_file:
+                    gpx = gpxpy.parse(gpx_file)
+                
+            except Exception as e:
+                print(f"Error parsing GPX file '{in_path_file}': {e}")
+                shutil.move(in_path_file,(manual+"/"+file_name))
+                return
+            #
             data = gpx.tracks[0].segments[0]
             st_coord_lat = ('{0}'.format(data.points[0].latitude))
             st_coord_lon = ('{0}'.format(data.points[0].longitude))
