@@ -173,8 +173,9 @@ class MainApplication(tk.Frame):
             data = gpx.tracks[0].segments[0]
             st_coord_lat = ('{0}'.format(data.points[0].latitude))
             st_coord_lon = ('{0}'.format(data.points[0].longitude))
-            nd_coord_lat = ('{0}'.format(data.points[-1].latitude))
-            nd_coord_lon = ('{0}'.format(data.points[-1].longitude))
+            data_2 = gpx.tracks[0].segments[-1]
+            nd_coord_lat = ('{0}'.format(data_2.points[-1].latitude))
+            nd_coord_lon = ('{0}'.format(data_2.points[-1].longitude))
             url_api = ''.join(("https://api.bigdatacloud.net/data/reverse-geocode?latitude=",st_coord_lat,"&longitude=",st_coord_lon,"&localityLanguage=en&key=",apiKey)) 
             response = requests.get(url_api)
             json_r = json.loads(response.text)
