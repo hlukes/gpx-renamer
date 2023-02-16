@@ -28,11 +28,22 @@ class MainApplication(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.parent = parent
     #Loading config and settings files
-        with open(os.path.join(sys.path[0],"key.json"),"r",encoding="UTF-8") as keyfile:
-            key_raw = keyfile.read() 
-        apiKey_raw = json.loads(key_raw)
-        apiKey =apiKey_raw["key"]
-    
+        
+        #Loading the keyfile
+
+        keyfile_path = os.path.join(sys.path[0],"key.json")
+        try:
+            with open(keyfile_path,"r",encoding="UTF-8") as keyfile:
+                key_raw = keyfile.read() 
+                apiKey_raw = json.loads(key_raw)
+                apiKey = apiKey_raw["key"]
+        except FileNotFoundError as err:
+            print(f"The keyfile at {keyfile_path} was not found, please provide a valid key file.")
+            raise
+        except Exception as err:
+            print(f"Unexpected {err}, {type(err)}")
+            raise
+        
     #functions
         #GPG function and two start functions - Tkinter button called, check directory function
         def CheckDir(path):
@@ -149,13 +160,22 @@ class MainApplication(tk.Frame):
                 if not file_name in orig_cont:
                         shutil.copy2(in_path_file,orig)
 
-            gpx_file = open(in_path_file, 'r', encoding='utf-8')
-            gpx = gpxpy.parse(gpx_file)
+            # testing testing
+            try:
+                with open(in_path_file, 'r', encoding='utf-8') as gpx_file:
+                    gpx = gpxpy.parse(gpx_file)
+                
+            except Exception as e:
+                print(f"Error parsing GPX file '{in_path_file}': {e}")
+                shutil.move(in_path_file,(manual+"/"+file_name))
+                return
+            #
             data = gpx.tracks[0].segments[0]
             st_coord_lat = ('{0}'.format(data.points[0].latitude))
             st_coord_lon = ('{0}'.format(data.points[0].longitude))
-            nd_coord_lat = ('{0}'.format(data.points[-1].latitude))
-            nd_coord_lon = ('{0}'.format(data.points[-1].longitude))
+            data_2 = gpx.tracks[0].segments[-1]
+            nd_coord_lat = ('{0}'.format(data_2.points[-1].latitude))
+            nd_coord_lon = ('{0}'.format(data_2.points[-1].longitude))
             url_api = ''.join(("https://api.bigdatacloud.net/data/reverse-geocode?latitude=",st_coord_lat,"&longitude=",st_coord_lon,"&localityLanguage=en&key=",apiKey)) 
             response = requests.get(url_api)
             json_r = json.loads(response.text)
@@ -168,8 +188,16 @@ class MainApplication(tk.Frame):
             city2 = str(json_r2['locality'])
             data_points = data.points[0]
             year = str(data_points.time.year)
-            month = str(data_points.time.month)
-            day = str(data_points.time.day)
+            month_raw = str(data_points.time.month)
+            if (int(month_raw) < 10):
+                month = "".join(("0",month_raw))
+            else:
+                month = month_raw
+            day_raw = str(data_points.time.day)
+            if (int(day_raw) < 10):
+                day = "".join(("0",month_raw))
+            else:
+                day = day_raw
             if data_points.time.minute<10:
                 start_time = (str(data_points.time.hour)+"∶0"+str(data_points.time.minute))
             else:
@@ -253,11 +281,11 @@ class MainApplication(tk.Frame):
                             nur = nur.replace(i.rep,empt)
             gpx_file.close()
             final_name_raw = nur
-            whitelist = set(string.ascii_letters + string.digits + "!_-()ěščřžýáíéĚŠČŘŽÝÁÍÉÚŮúůťď∶ ")
+            whitelist = set(string.ascii_letters + string.digits + "!_-()#ÄäÜüÖößèěščřžýáíéĚŠČŘŽÝÁÍÉÚŮúůťď∶ " + "ąęćłńśźż")    #whitelist for the generated file name, anything not here will not come through
             final_name_raw = ''.join(c for c in final_name_raw if c in whitelist)
             nur = final_name_raw
 
-            if (manual_move == False) or (manual == False):
+            if (manual_move == False) or (os.path.exists(manual) == False):
                 while (final_name_raw+".gpx") in os.listdir(outp):
                         y = y+1
                         final_name_raw = nur+"_"+str(y)
@@ -265,7 +293,7 @@ class MainApplication(tk.Frame):
                 shutil.move(in_path_file,(outp+"\\"+final_name_raw))
             else:
                 #Problem, os.listdir not working without manual % should not be a problem
-
+                
                 while (final_name_raw+".gpx") in os.listdir(manual):
                         y = y+1
                         final_name_raw = nur+"_"+str(y)
